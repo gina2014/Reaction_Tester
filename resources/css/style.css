@@ -1,0 +1,9 @@
+#shape {
+  width: 200px;
+  height: 200px;
+  margin: 50px;
+}
+
+.red_square {
+  background-color: red;
+}
