@@ -1,7 +1,25 @@
+.main-header {
+  font-size: 150px;
+  color: red;
+  margin: 0 auto;
+  text-align: center;
+  width: auto;
+  background-color: black;
+}
+
+#main {
+  width: 1200px;
+  height: 800px;
+  background-color: grey;
+  margin: 0 auto;
+}
+
 #shape {
   width: 200px;
   height: 200px;
-  margin: 50px;
+  /*margin: 50px;*/
+  position: absolute;
+  background-color: red;
 }
 
 .red_square {
