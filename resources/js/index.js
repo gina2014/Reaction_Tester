@@ -1,41 +1,58 @@
 // Variables
 //var shape = document.getElementById("shape");
-var shape = document.createElement("div");
-var shapeVisible = false;
-var xPosition = getRandomNumber();
-var yPosition = getRandomNumber();
-createShape();
-// Random position, random colour and random shape(square/circle)
 
+var dt = new Date( "December 25, 1995 23:15:20" );
+console.log(dt);
+var startTime = dt.getTime();
+console.log(startTime);
+var endTime;
+var timeTaken;
+var shape = document.getElementById("shape");
+var timeOut;
 
-// Functions
+// Time taken to click
+function addTimeTaken(time) {
+  console.log("time taken: ", time);
+}
 
-// Create Shape Functions
+// Create Shape Function
 function createShape() {
-  //  var shape = document.createElement("div");
-
   // Set Elements Attributes
-  shape.setAttribute("id", "shape");
+  console.log("In the Create Shape Function");
 
-  shape.style.top = xPosition + 'px';
-  console.log("xPosition :", xPosition);
-  shape.style.left = yPosition + 'px';
-  console.log("yPosition :", yPosition);
-  // Add element to the main Div
-  var element = document.getElementById("main");
-  element.appendChild(shape);
-  console.log("in the createShape function");
+  shape.style.position = 'relative';
+  shape.style.display = 'block';
+  randomizeShapeAppearance();
+}
+
+function randomizeShapeAppearance() {
+  var shapeWidth = document.getElementById('shape').offsetWidth;
+  var shapeHeight = document.getElementById('shape').offsetHeight;
+  console.log("Shape Width : ", shapeWidth);
+  console.log("Shape Height : ", shapeHeight);
+  var yPosition = getRandomXYPosition(550);
+  var xPosition = getRandomXYPosition(950);
+  shape.style.top = yPosition + 'px';
+  shape.style.left = xPosition + 'px';
 }
 
 // onClick Function
 // When shape is clicked it will disappear
 shape.onclick = function() {
   shape.style.display = "none";
-  shapeVisible = false;
+  endTime = new Date().getTime();
+  timeTaken = endTime - startTime;
+  console.log("Time take to click is:", timeTaken);
+  addTimeTaken(timeTaken);
+  timeOutToCreateShape();
 }
 
-function getRandomNumber() {
-  var x = Math.floor((Math.random() * 1000) + 1);
+function timeOutToCreateShape() {
+  timeOut = setTimeout(createShape, 2000);
+}
+
+function getRandomXYPosition(seed) {
+  var x = Math.floor((Math.random() * seed) + 1); // - ($('main').width() - $('shape').width());
   console.log(x);
   return x;
 }
