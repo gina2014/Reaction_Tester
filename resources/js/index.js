@@ -7,8 +7,13 @@ var startTime = dt.getTime();
 console.log(startTime);
 var endTime;
 var timeTaken;
-var shape = document.getElementById("shape");
 var timeOut;
+
+// Shape Variables
+var shape = document.getElementById("shape");
+var maxShapeWidth = document.getElementById('shape').offsetWidth;
+var maxShapeHeight = document.getElementById('shape').offsetHeight;
+
 
 // Time taken to click
 function addTimeTaken(time) {
@@ -19,21 +24,41 @@ function addTimeTaken(time) {
 function createShape() {
   // Set Elements Attributes
   console.log("In the Create Shape Function");
-
   shape.style.position = 'relative';
   shape.style.display = 'block';
   randomizeShapeAppearance();
 }
 
 function randomizeShapeAppearance() {
-  var shapeWidth = document.getElementById('shape').offsetWidth;
-  var shapeHeight = document.getElementById('shape').offsetHeight;
+  var shapeWidth = Math.floor((Math.random() * maxShapeWidth));
+  var shapeHeight = shapeWidth;
+
+  // If shape width is too small (under 40px) then recalculate until bigger than 40px
+  while (shapeWidth < 40)
+  {
+    var shapeWidth = Math.floor((Math.random() * maxShapeWidth));
+  }
+
   console.log("Shape Width : ", shapeWidth);
-  console.log("Shape Height : ", shapeHeight);
-  var yPosition = getRandomXYPosition(550);
-  var xPosition = getRandomXYPosition(950);
+
+  // Base X Position of shape in div based on Div Width and width of shape
+  var maxXPosition = document.getElementById('main').offsetWidth - shapeWidth;
+
+  // Base Y Position of shape in div based on Div Height and height of shape
+  var maxYPosition = document.getElementById('main').offsetHeight - shapeHeight;
+
+  console.log("maxXPosition : ", maxXPosition);
+  console.log("maxYPosition : ", maxYPosition);
+
+  // Get Random X and Y Positions using max X and Y Positions as a base so the shape does not go outside the containing Div
+  var yPosition = getRandomXYPosition(maxYPosition);
+  var xPosition = getRandomXYPosition(maxYPosition);
+
+  // Set Styles for the shape
   shape.style.top = yPosition + 'px';
   shape.style.left = xPosition + 'px';
+  shape.style.width = shapeWidth + 'px';
+  shape.style.height = shapeHeight + 'px';
 }
 
 // onClick Function
