@@ -13,9 +13,9 @@ var timeOut;
 var shape = document.getElementById("shape");
 var maxShapeWidth = document.getElementById('shape').offsetWidth;
 var maxShapeHeight = document.getElementById('shape').offsetHeight;
-var shapeColors = ["blue", "red", "green", "yellow", "white", "lime", "gold", "violet", "aqua", "black", "blueviolet"];
+var shapeColors = ["blue", "red", "green", "yellow", "white", "lime", "gold", "violet", "aqua", "grey", "blueviolet"];
 var previousColor = "red";
-var currentColor = previousColor;
+var shapeTypes = ["square", "circle"];
 
 // Time taken to click
 function addTimeTaken(time) {
@@ -68,6 +68,15 @@ function randomizeShapeAppearance() {
   //var colorString = color.toString();
   //console.log("colorString : ", colorString);
   shape.style.backgroundColor = color;
+
+  var shapeType = randomShapeType();
+
+  if(shapeType == "square") {
+    shape.style.borderRadius = "0";
+  }
+  else {
+    shape.style.borderRadius = "50%";
+  }
 }
 
 // onClick Function
@@ -104,8 +113,17 @@ function getRandomColor() {
     var color = shapeColors[random];
   }
 
-  currentColor = color;
   previousColor = color;
 
   return color;
+}
+
+function randomShapeType() {
+  var random = Math.floor((Math.random() * 2));
+  console.log("Random Shape number:", random);
+
+  var shapeType = shapeTypes[random];
+  console.log("Shape Type is :", shapeType);
+
+  return shapeType;
 }
