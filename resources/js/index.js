@@ -1,12 +1,6 @@
 // Variables
-//var shape = document.getElementById("shape");
-//
-//var dt = new Date( "December 25, 1995 23:15:20" );
-//1console.log(dt);
-//var startTime = dt.getTime();
-//console.log(startTime);
 var startTime = new Date().getTime();
-console.log(startTime);
+//console.log(startTime);
 var endTime;
 var timeTaken;
 var timeOut;
@@ -19,23 +13,26 @@ var shapeColors = ["aquamarine", "crimson", "deeppink", "yellow", "aliceblue", "
 var previousColor = "red";
 var shapeTypes = ["square", "circle"];
 
-// Time taken to click
+// Add time taken to click to web page display
 function addTimeTaken(time) {
-  console.log("time taken: ", time);
+  //console.log("time taken: ", time);
   document.getElementById("timeTaken").innerHTML = time + "s";
 }
 
 // Create Shape Function
 function createShape() {
   // Set Elements Attributes
-  console.log("In the Create Shape Function");
+  //console.log("In the Create Shape Function");
+  
   shape.style.position = 'relative';
   shape.style.display = 'block';
   randomizeShapeAppearance();
   startTime = new Date().getTime();
 }
 
+// Randomize the shape appearance
 function randomizeShapeAppearance() {
+  //Shape width
   var shapeWidth = Math.floor((Math.random() * maxShapeWidth));
 
   // If shape width is too small (under 40px) then recalculate until bigger than 40px
@@ -44,7 +41,7 @@ function randomizeShapeAppearance() {
     var shapeWidth = Math.floor((Math.random() * maxShapeWidth));
   }
 
-  console.log("Shape Width : ", shapeWidth);
+  //console.log("Shape Width : ", shapeWidth);
 
   // Base X Position of shape in div based on Div Width and width of shape
   var maxXPosition = document.getElementById('main').offsetWidth - shapeWidth;
@@ -52,8 +49,8 @@ function randomizeShapeAppearance() {
   // Base Y Position of shape in div based on Div Height and height of shape
   var maxYPosition = document.getElementById('main').offsetHeight - shapeWidth;
 
-  console.log("maxXPosition : ", maxXPosition);
-  console.log("maxYPosition : ", maxYPosition);
+  //console.log("maxXPosition : ", maxXPosition);
+  //console.log("maxYPosition : ", maxYPosition);
 
   // Get Random X and Y Positions using max X and Y Positions as a base so the shape does not go outside the containing Div
   var yPosition = getRandomXYPosition(maxYPosition);
@@ -68,13 +65,15 @@ function randomizeShapeAppearance() {
   // Get Random Color from array for shapeWidth
   var color = getRandomColor();
 
-  console.log("Color is: ", color);
-  //var colorString = color.toString();
-  //console.log("colorString : ", colorString);
+  //console.log("Color is: ", color);
+
+  // set shape color
   shape.style.backgroundColor = color;
 
+  // select random shape (currently square or circle)
   var shapeType = randomShapeType();
 
+  // Set the border radius for type of shape
   if(shapeType == "square") {
     shape.style.borderRadius = "0";
   }
@@ -87,29 +86,39 @@ function randomizeShapeAppearance() {
 // When shape is clicked it will disappear
 shape.onclick = function() {
   shape.style.display = "none";
+
+  // get time shape is clicked
   endTime = new Date().getTime();
+
+  // To get time taken for shape to be clicked minus endTime from StartTime
   timeTaken = (endTime - startTime) / 1000;
-  console.log("Time taken to click is:", timeTaken);
+
+  //console.log("Time taken to click is:", timeTaken);
+
   addTimeTaken(timeTaken);
+
   timeOutToCreateShape();
 }
 
+// random time to wait before creating next shape
 function timeOutToCreateShape() {
   timeOut = setTimeout(createShape, Math.random() * 2000);
 }
 
+// Random X or Y Position for shape positioning
 function getRandomXYPosition(seed) {
   var x = Math.floor((Math.random() * seed) + 1); // - ($('main').width() - $('shape').width());
-  console.log(x);
+  //console.log(x);
   return x;
 }
 
+// Select random color from color array
 function getRandomColor() {
   var random = Math.floor((Math.random() * 10));
-  console.log("Random Number is : ", random);
+  //console.log("Random Number is : ", random);
 
   var color = shapeColors[random];
-  console.log("random color from array is : ", color);
+  //console.log("random color from array is : ", color);
 
   while(color == previousColor)
   {
@@ -122,12 +131,13 @@ function getRandomColor() {
   return color;
 }
 
+// Get Random Shape type from shape array
 function randomShapeType() {
   var random = Math.floor((Math.random() * 2));
-  console.log("Random Shape number:", random);
+  //console.log("Random Shape number:", random);
 
   var shapeType = shapeTypes[random];
-  console.log("Shape Type is :", shapeType);
+  //console.log("Shape Type is :", shapeType);
 
   return shapeType;
 }
