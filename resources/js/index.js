@@ -1,9 +1,11 @@
 // Variables
 //var shape = document.getElementById("shape");
-
-var dt = new Date( "December 25, 1995 23:15:20" );
-console.log(dt);
-var startTime = dt.getTime();
+//
+//var dt = new Date( "December 25, 1995 23:15:20" );
+//1console.log(dt);
+//var startTime = dt.getTime();
+//console.log(startTime);
+var startTime = new Date().getTime();
 console.log(startTime);
 var endTime;
 var timeTaken;
@@ -20,6 +22,7 @@ var shapeTypes = ["square", "circle"];
 // Time taken to click
 function addTimeTaken(time) {
   console.log("time taken: ", time);
+  document.getElementById("timeTaken").innerHTML = time + "s";
 }
 
 // Create Shape Function
@@ -29,6 +32,7 @@ function createShape() {
   shape.style.position = 'relative';
   shape.style.display = 'block';
   randomizeShapeAppearance();
+  startTime = new Date().getTime();
 }
 
 function randomizeShapeAppearance() {
@@ -84,14 +88,14 @@ function randomizeShapeAppearance() {
 shape.onclick = function() {
   shape.style.display = "none";
   endTime = new Date().getTime();
-  timeTaken = endTime - startTime;
-  console.log("Time take to click is:", timeTaken);
+  timeTaken = (endTime - startTime) / 1000;
+  console.log("Time taken to click is:", timeTaken);
   addTimeTaken(timeTaken);
   timeOutToCreateShape();
 }
 
 function timeOutToCreateShape() {
-  timeOut = setTimeout(createShape, 2000);
+  timeOut = setTimeout(createShape, Math.random() * 2000);
 }
 
 function getRandomXYPosition(seed) {
