@@ -15,7 +15,7 @@ var timeOut;
 var shape = document.getElementById("shape");
 var maxShapeWidth = document.getElementById('shape').offsetWidth;
 var maxShapeHeight = document.getElementById('shape').offsetHeight;
-var shapeColors = ["blue", "red", "green", "yellow", "white", "lime", "gold", "violet", "aqua", "grey", "blueviolet"];
+var shapeColors = ["aquamarine", "crimson", "deeppink", "yellow", "aliceblue", "lime", "coral", "violet", "aqua", "pink", "blueviolet"];
 var previousColor = "red";
 var shapeTypes = ["square", "circle"];
 
@@ -57,7 +57,7 @@ function randomizeShapeAppearance() {
 
   // Get Random X and Y Positions using max X and Y Positions as a base so the shape does not go outside the containing Div
   var yPosition = getRandomXYPosition(maxYPosition);
-  var xPosition = getRandomXYPosition(maxYPosition);
+  var xPosition = getRandomXYPosition(maxXPosition);
 
   // Set Positions for the shape
   shape.style.top = yPosition + 'px';
